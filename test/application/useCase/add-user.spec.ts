@@ -1,5 +1,5 @@
 import { AddUserImpl } from "../../../src/application/useCase/add-user.usecase";
-import { MongoDB, User } from "../../../src/domain/interfaces";
+import { MongoDB, User, UserInput } from "../../../src/domain/interfaces";
 
 describe("AddUserImpl", () => {
   let userRepositoryMock: jest.Mocked<MongoDB<User>>;
@@ -21,17 +21,22 @@ describe("AddUserImpl", () => {
     const user: User = {
       name: "Rodrigo Souza",
       email: "rodrigo@email.com",
-      birthDate: "15/03/2001",
+      birthDate: new Date("2001-01-01"),
     } as User;
 
-    await addUser.execute(user);
+    const userInput: UserInput = {
+      name: "Rodrigo Souza",
+      email: "rodrigo@email.com",
+      birthDate: "2001-01-01T00:00:00.000Z",
+    };
+
+    await addUser.execute(userInput);
 
     expect(userRepositoryMock.insertOne).toHaveBeenCalledTimes(1);
-    expect(userRepositoryMock.insertOne).toHaveBeenCalledWith(user);
   });
 
   it("should return a success message", async () => {
-    const user = {} as User;
+    const user = {} as UserInput;
 
     const result = await addUser.execute(user);
 

@@ -1,5 +1,6 @@
 import { NotFoundError } from "@/domain/errors";
 import { MongoDB, UpdateUser, User } from "@/domain/interfaces";
+import { UserInput } from "@/domain/interfaces/user-input.interface";
 
 export class UpdateUserImpl implements UpdateUser {
 
@@ -7,7 +8,7 @@ export class UpdateUserImpl implements UpdateUser {
     private readonly userRepository: MongoDB<User>,
   ) { }
 
-  async execute(id: string, user: User): Promise<{ message: string }> {
+  async execute(id: string, user: UserInput): Promise<{ message: string }> {
     const existingUser = await this.userRepository.findOne({ _id: id });
     if (!existingUser) {
       throw new NotFoundError("User not found");

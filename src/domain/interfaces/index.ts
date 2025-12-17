@@ -7,3 +7,4 @@ export * from './get-user.interface';
 export * from './list-users.interface';
 export * from './update-user.interface';
 export * from './delete-user.interface';
+export * from './user-input.interface';

@@ -28,11 +28,11 @@ describe("GetUserImpl", () => {
   it("should return the user from cache when cache exists", async () => {
     const userId = "user-id-123";
 
-    const cachedUser: WithId<User> = {
+    const cachedUser = {
       name: "Rodrigo Souza",
       email: "rodrigo@email.com",
-      birthDate: "15/03/2001",
-    } as WithId<User>;
+      birthDate: "2001-01-01T00:00:00.000Z",
+    };
 
     cacheRepositoryMock.get.mockResolvedValueOnce(
       JSON.stringify(cachedUser),
@@ -55,7 +55,7 @@ describe("GetUserImpl", () => {
     const userFromDb: WithId<User> = {
       name: "Rodrigo Souza",
       email: "rodrigo@email.com",
-      birthDate: "15/03/2001",
+      birthDate: new Date("2001-01-01"),
     } as WithId<User>;
 
     cacheRepositoryMock.get.mockResolvedValueOnce(null);

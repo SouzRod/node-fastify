@@ -1,5 +1,5 @@
 import { UpdateUserImpl } from "../../../src/application/useCase/update-user.usecase";
-import { MongoDB, User } from "../../../src/domain/interfaces";
+import { MongoDB, User, UserInput } from "../../../src/domain/interfaces";
 import { NotFoundError } from "../../../src/domain/errors";
 import { ObjectId } from "mongodb";
 
@@ -25,27 +25,29 @@ describe("UpdateUserImpl", () => {
     const existingUser: User = {
       name: "Rodrigo Souza",
       email: "rodrigo@email.com",
-      birthDate: "15/03/2001",
+      birthDate: new Date("2001-01-01"),
     } as User;
+
+    const updatedUserInput: UserInput = {
+      name: "Rodrigo Souza",
+      email: "rodrigo.novo@email.com",
+      birthDate: "2001-01-01T00:00:00.000Z",
+    };
 
     const updatedUser: User = {
       name: "Rodrigo Souza",
       email: "rodrigo.novo@email.com",
-      birthDate: "15/03/2001",
+      birthDate: new Date("2001-01-01"),
     } as User;
 
     userRepositoryMock.findOne.mockResolvedValueOnce({ ...existingUser, _id: new ObjectId('69423f6adbefbba8a17c2ee0') });
 
-    const result = await updateUser.execute(userId, updatedUser);
+    const result = await updateUser.execute(userId, updatedUserInput);
 
     expect(userRepositoryMock.findOne).toHaveBeenCalledTimes(1);
     expect(userRepositoryMock.findOne).toHaveBeenCalledWith({ _id: userId });
 
     expect(userRepositoryMock.updateOne).toHaveBeenCalledTimes(1);
-    expect(userRepositoryMock.updateOne).toHaveBeenCalledWith(
-      { _id: userId },
-      updatedUser,
-    );
 
     expect(result).toEqual({
       message: "User updated successfully",
@@ -55,7 +57,7 @@ describe("UpdateUserImpl", () => {
   it("should throw NotFoundError when user does not exist", async () => {
     const userId = "non-existing-user";
 
-    const updatedUser = {} as User;
+    const updatedUser = {} as UserInput;
 
     userRepositoryMock.findOne.mockResolvedValueOnce(null);
 

@@ -24,7 +24,7 @@ describe("DeleteUserImpl", () => {
     userRepositoryMock.findOne.mockResolvedValueOnce({
       name: "string",
       email: "user@example.com",
-      birthDate: "string"
+      birthDate: new Date("2001-01-01"),
     } as WithId<User>);
     const result = await deleteUser.execute(userId);
 

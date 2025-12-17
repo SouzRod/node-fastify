@@ -1,5 +1,5 @@
-import { User } from "./user.interface";
+import { UserInput } from "./user-input.interface";
 
 export interface UpdateUser {
-  execute(id: string, user: User): Promise<{ message: string }>;
+  execute(id: string, user: UserInput): Promise<{ message: string }>;
 }

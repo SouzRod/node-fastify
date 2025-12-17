@@ -1,4 +1,5 @@
 import { AddUser, MongoDB, User } from "@/domain/interfaces";
+import { UserInput } from "@/domain/interfaces/user-input.interface";
 
 export class AddUserImpl implements AddUser {
 
@@ -6,7 +7,7 @@ export class AddUserImpl implements AddUser {
     private readonly userRepository: MongoDB<User>,
   ) { }
 
-  async execute(input: User): Promise<{ message: string }> {
+  async execute(input: UserInput): Promise<{ message: string }> {
     const newUser = {
       ...input,
       birthDate: new Date(input.birthDate),

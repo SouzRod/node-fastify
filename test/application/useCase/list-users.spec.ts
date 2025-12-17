@@ -25,18 +25,18 @@ describe("ListUsersImpl", () => {
   });
 
   it("should return users from cache when cache exists", async () => {
-    const cachedUsers: WithId<User>[] = [
+    const cachedUsers = [
       {
         name: "Rodrigo Souza",
         email: "rodrigo@email.com",
-        birthDate: "15/03/2001",
+        birthDate: "2001-01-01T00:00:00.000Z",
       },
       {
         name: "Maria Silva",
         email: "maria@email.com",
-        birthDate: "20/08/1998",
+        birthDate: "2001-01-01T00:00:00.000Z",
       },
-    ] as WithId<User>[];
+    ];
 
     cacheRepositoryMock.get.mockResolvedValueOnce(
       JSON.stringify(cachedUsers),
@@ -58,7 +58,7 @@ describe("ListUsersImpl", () => {
       {
         name: "Rodrigo Souza",
         email: "rodrigo@email.com",
-        birthDate: "15/03/2001",
+        birthDate: new Date("2001-01-01"),
       },
     ] as WithId<User>[];
 
