@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./.ts-jest",
+    "declaration": false,
+    "types": ["jest", "node"],
+    "resolveJsonModule": true
+  },
+  "include": ["src", "test"]
+}

@@ -1,0 +1,49 @@
+version: "3.9"
+
+volumes:
+  mongo_data_rs_solutions:
+
+services:
+  app:
+    container_name: rs_solutions_app
+    image: rs_solutions:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      # APP
+      PORT: 3000
+      HOST: 0.0.0.0
+
+      # Redis
+      REDIS_ENABLED: false
+      REDIS_PORT: 6379
+      REDIS_HOST: redis
+      REDIS_DEFAULT_EXPIRE: 3600
+
+      # MongoDB
+      MONGODB_URI: mongodb://mongo:27017/
+      MONGODB_DB_NAME: rs_solutions
+    depends_on:
+      - redis
+      - mongo
+    restart: always
+
+  redis:
+    image: redis:latest
+    container_name: rs_solutions_redis
+    ports:
+    - "6379:6379"
+    command: redis-server --appendonly yes
+    restart: always
+
+  mongo:
+    image: mongo:latest
+    container_name: rs_solutions_mongo
+    ports:
+    - "27017:27017"
+    volumes:
+      - mongo_data_rs_solutions:/data/db
+    restart: always
