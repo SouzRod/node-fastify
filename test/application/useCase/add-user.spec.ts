@@ -18,12 +18,6 @@ describe("AddUserImpl", () => {
   });
 
   it("should insert a user into the repository", async () => {
-    const user: User = {
-      name: "Rodrigo Souza",
-      email: "rodrigo@email.com",
-      birthDate: new Date("2001-01-01"),
-    } as User;
-
     const userInput: UserInput = {
       name: "Rodrigo Souza",
       email: "rodrigo@email.com",
