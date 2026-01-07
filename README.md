@@ -172,3 +172,13 @@ npm test
 - [Driver MongoDB](https://www.mongodb.com/docs/drivers/node)
 - [Cliente Redis ioredis](https://github.com/luin/ioredis)
 
+## 📊 Benchmark
+
+Para rodar o benchmark entre na pasta do projeto e execute o seguinte script no terminal:
+
+```bash
+./benchmark.sh http://127.0.0.1:3000/v1/users
+```
+
+Valide que o projeto esteja rodando corretamente antes de executar o benchmark.</br>
+Se possível rode o `docker compose up` primeiro.
