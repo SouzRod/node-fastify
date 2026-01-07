@@ -5,7 +5,7 @@ const cacheRepository = new CacheRepository();
 const userRepository = new UserRepository();
 
 export const getUserRouter = {
-  url: "/users/:id",
+  url: "/v1/users/:id",
   method: "GET",
   handler: (request: any, reply: any) => {
     const getUserUseCase = new GetUserImpl(userRepository, cacheRepository);

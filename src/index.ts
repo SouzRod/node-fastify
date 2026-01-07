@@ -21,11 +21,11 @@ import { HttpStatus } from './domain/enum/http-status.enum';
     },
   });
 
-  app.register(swaggerUi, { routePrefix: `${config.app.stripPrefix}/docs` });
+  app.register(swaggerUi, { routePrefix: `/docs` });
 
   app.register(cors, { origin: (_, cb) => cb(null, true) });
 
-  app.register(router, { prefix: config.app.stripPrefix });
+  app.register(router);
 
   app.setErrorHandler(function (error: BaseError, request, reply) {
     console.error(error);

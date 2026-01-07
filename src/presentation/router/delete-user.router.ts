@@ -4,7 +4,7 @@ import { DeleteUserImpl } from "@/application/useCase";
 const userRepository = new UserRepository();
 
 export const deleteUserRouter = {
-  url: "/users/:id",
+  url: "/v1/users/:id",
   method: "DELETE",
   handler: (request: any, reply: any) => {
     const deleteUserUseCase = new DeleteUserImpl(userRepository);

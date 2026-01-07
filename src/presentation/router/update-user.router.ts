@@ -4,7 +4,7 @@ import { UpdateUserImpl } from "@/application/useCase";
 const userRepository = new UserRepository();
 
 export const updateUserRouter = {
-  url: "/users/:id",
+  url: "/v1/users/:id",
   method: "PUT",
   handler: (request: any, reply: any) => {
     const updateUserUseCase = new UpdateUserImpl(userRepository);

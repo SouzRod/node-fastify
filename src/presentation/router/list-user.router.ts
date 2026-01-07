@@ -5,7 +5,7 @@ const cacheRepository = new CacheRepository();
 const userRepository = new UserRepository();
 
 export const listUsersRouter = {
-  url: "/users",
+  url: "/v1/users",
   method: "GET",
   handler: (request: any, reply: any) => {
     const listUsersUseCase = new ListUsersImpl(userRepository, cacheRepository);

@@ -4,7 +4,7 @@ import { AddUserImpl } from "@/application/useCase";
 const userRepository = new UserRepository();
 
 export const addUserRouter = {
-  url: "/users",
+  url: "/v1/users",
   method: "POST",
   handler: (request: any, reply: any) => {
     const addUserUseCase = new AddUserImpl(userRepository);
