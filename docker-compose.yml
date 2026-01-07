@@ -1,12 +1,12 @@
 version: "3.9"
 
 volumes:
-  mongo_data_rs_solutions:
+  mongo_data_node-fastify:
 
 services:
   app:
-    container_name: rs_solutions_app
-    image: rs_solutions:latest
+    container_name: node-fastify_app
+    image: node-fastify:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -25,7 +25,7 @@ services:
 
       # MongoDB
       MONGODB_URI: mongodb://mongo:27017/
-      MONGODB_DB_NAME: rs_solutions
+      MONGODB_DB_NAME: node-fastify
     depends_on:
       - redis
       - mongo
@@ -33,7 +33,7 @@ services:
 
   redis:
     image: redis:latest
-    container_name: rs_solutions_redis
+    container_name: node-fastify_redis
     ports:
     - "6379:6379"
     command: redis-server --appendonly yes
@@ -41,9 +41,9 @@ services:
 
   mongo:
     image: mongo:latest
-    container_name: rs_solutions_mongo
+    container_name: node-fastify_mongo
     ports:
     - "27017:27017"
     volumes:
-      - mongo_data_rs_solutions:/data/db
+      - mongo_data_node-fastify:/data/db
     restart: always
