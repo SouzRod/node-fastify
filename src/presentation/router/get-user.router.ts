@@ -1,5 +1,4 @@
 import { CacheRepository, UserRepository } from "@/infrastructure/repository";
-import { GetUserController } from "../controller/get-user.controller";
 import { GetUserImpl } from "@/application/useCase";
 
 const cacheRepository = new CacheRepository();
@@ -10,7 +9,7 @@ export const getUserRouter = {
   method: "GET",
   handler: (request: any, reply: any) => {
     const getUserUseCase = new GetUserImpl(userRepository, cacheRepository);
-    return new GetUserController(getUserUseCase).handle(request, reply);
+    return getUserUseCase.execute(request.params.id);
   },
   schema: {
     description: 'Rota para obter um usuário',

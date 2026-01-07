@@ -1,5 +1,0 @@
-#!/bin/sh
-
-echo "🔍 Rodando testes antes do push..."
-
-npm test

@@ -1,4 +1,3 @@
-import { AddUserController } from "../controller/add-user.controller";
 import { UserRepository } from "@/infrastructure/repository";
 import { AddUserImpl } from "@/application/useCase";
 
@@ -9,7 +8,7 @@ export const addUserRouter = {
   method: "POST",
   handler: (request: any, reply: any) => {
     const addUserUseCase = new AddUserImpl(userRepository);
-    return new AddUserController(addUserUseCase).handle(request, reply);
+    return addUserUseCase.execute(request.body)
   },
   schema: {
     description: 'Rota para adicionar um novo usuário',

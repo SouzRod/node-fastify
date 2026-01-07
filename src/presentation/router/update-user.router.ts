@@ -1,4 +1,3 @@
-import { UpdateUserController } from "../controller/update-user.controller";
 import { UserRepository } from "@/infrastructure/repository";
 import { UpdateUserImpl } from "@/application/useCase";
 
@@ -9,7 +8,7 @@ export const updateUserRouter = {
   method: "PUT",
   handler: (request: any, reply: any) => {
     const updateUserUseCase = new UpdateUserImpl(userRepository);
-    return new UpdateUserController(updateUserUseCase).handle(request, reply);
+    return updateUserUseCase.execute(request.params.id, request.body);
   },
   schema: {
     description: 'Rota para atualizar um usuário',

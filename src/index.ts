@@ -43,6 +43,5 @@ import { HttpStatus } from './domain/enum/http-status.enum';
       process.exit(1);
     }
     console.info(`Server listening at ${address}`);
-    console.info(`Swagger at ${address}${config.app.stripPrefix}/docs`);
   });
 })()

@@ -1,4 +1,3 @@
-import { DeleteUserController } from "../controller/delete-user.controller";
 import { UserRepository } from "@/infrastructure/repository";
 import { DeleteUserImpl } from "@/application/useCase";
 
@@ -9,7 +8,7 @@ export const deleteUserRouter = {
   method: "DELETE",
   handler: (request: any, reply: any) => {
     const deleteUserUseCase = new DeleteUserImpl(userRepository);
-    return new DeleteUserController(deleteUserUseCase).handle(request, reply);
+    return deleteUserUseCase.execute(request.params.id);
   },
   schema: {
     description: 'Rota para deletar um usuário',
